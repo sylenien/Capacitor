@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/static/js/main.d20cdf14.chunk.js",
-    "main.js.map": "/static/js/main.d20cdf14.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.72368819.js",
-    "runtime-main.js.map": "/static/js/runtime-main.72368819.js.map",
-    "static/js/2.5c340cbd.chunk.js": "/static/js/2.5c340cbd.chunk.js",
-    "static/js/2.5c340cbd.chunk.js.map": "/static/js/2.5c340cbd.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.6dea0f05.chunk.css.map": "/static/css/main.6dea0f05.chunk.css.map",
-    "static/js/2.5c340cbd.chunk.js.LICENSE.txt": "/static/js/2.5c340cbd.chunk.js.LICENSE.txt"
+    "main.css": "/Capacitor/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/Capacitor/static/js/main.d20cdf14.chunk.js",
+    "main.js.map": "/Capacitor/static/js/main.d20cdf14.chunk.js.map",
+    "runtime-main.js": "/Capacitor/static/js/runtime-main.c4283218.js",
+    "runtime-main.js.map": "/Capacitor/static/js/runtime-main.c4283218.js.map",
+    "static/js/2.7bdc3a22.chunk.js": "/Capacitor/static/js/2.7bdc3a22.chunk.js",
+    "static/js/2.7bdc3a22.chunk.js.map": "/Capacitor/static/js/2.7bdc3a22.chunk.js.map",
+    "index.html": "/Capacitor/index.html",
+    "static/css/main.6dea0f05.chunk.css.map": "/Capacitor/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.7bdc3a22.chunk.js.LICENSE.txt": "/Capacitor/static/js/2.7bdc3a22.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.72368819.js",
-    "static/js/2.5c340cbd.chunk.js",
+    "static/js/runtime-main.c4283218.js",
+    "static/js/2.7bdc3a22.chunk.js",
     "static/css/main.6dea0f05.chunk.css",
     "static/js/main.d20cdf14.chunk.js"
   ]
