@@ -1,8 +1,11 @@
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { FilePicker } from 'evergreen-ui'
+import { observer } from 'mobx-react-lite'
+
 import { colors, ThemeContext } from 'const/theme'
 import { ComponentWithTheme } from 'const/types'
+import StatsStore from 'Stores/StatsStore'
 
 const MainPageContainer = styled.div<ComponentWithTheme>`
   display: flex;
@@ -33,16 +36,15 @@ interface ScenarioStats {
 const hint =
   '<Your steam folder>\\steamapps\\common\\FPSAimTrainer\\FPSAimTrainer\\stats'
 
-const MainPage: React.FC = () => {
+const MainPage: React.FC = observer(() => {
   const { isDarkTheme } = useContext(ThemeContext)
   const [filesProcessed, setProcessedValue] = useState(0)
-  const [allFiles, setAllFiles] = useState(0)
 
   const readCsv = (files: FileList) => {
     console.log(files)
 
     const scenarioCount = files.length
-    setAllFiles(scenarioCount)
+    StatsStore.statsAmount = scenarioCount
     setProcessedValue(0)
 
     const promises: Promise<ScenarioStats>[] = []
@@ -74,6 +76,8 @@ const MainPage: React.FC = () => {
     })
   }
 
+  const { statsAmount } = StatsStore
+
   return (
     <MainPageContainer isDarkTheme={isDarkTheme}>
       <Greeting>Upload your statistics to begin</Greeting>
@@ -85,10 +89,10 @@ const MainPage: React.FC = () => {
         className="customInput"
       />
       <Tip isDarkTheme={isDarkTheme}>
-        {allFiles === 0 ? hint : `${filesProcessed}/${allFiles}`}
+        {statsAmount === 0 ? hint : `${filesProcessed}/${statsAmount}`}
       </Tip>
     </MainPageContainer>
   )
-}
+})
 
 export default MainPage
