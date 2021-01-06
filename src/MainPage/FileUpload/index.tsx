@@ -24,22 +24,19 @@ const hint =
 const FileUpload: React.FC = observer(() => {
   const { isDarkTheme } = useContext(ThemeContext)
   const [filesProcessed, setProcessedValue] = useState(0)
+  const { statsAmount } = StatsStore
 
   const readCsv = (files: FileList) => {
-    console.log(files)
-
     const scenarioCount = files.length
-    StatsStore.statsAmount = scenarioCount
+    StatsStore.setStatsAmount(scenarioCount)
     setProcessedValue(0)
 
     const promises = createFilePromiseCollection(files, setProcessedValue)
 
     Promise.all(promises).then((scenarioStats) => {
-      StatsStore.setStats(scenarioStats)
+      StatsStore.saveData(scenarioStats)
     })
   }
-
-  const { statsAmount } = StatsStore
 
   return (
     <>
@@ -54,6 +51,10 @@ const FileUpload: React.FC = observer(() => {
       <Tip isDarkTheme={isDarkTheme}>
         {statsAmount === 0 ? hint : `${filesProcessed}/${statsAmount}`}
       </Tip>
+
+      {StatsStore.stats.map((stat) => (
+        <>{stat.name}</>
+      ))}
     </>
   )
 })

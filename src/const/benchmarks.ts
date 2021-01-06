@@ -1,15 +1,4 @@
-interface ISparky {
-  [key: string]: {
-    silver: number
-    gold: number
-    platinum: number
-    diamond: number
-    master: number
-    grandmaster: number
-    nova: number
-    ascended: number
-  }
-}
+import { ISparky } from 'const/types'
 
 export const SparkyBenchmarks: ISparky = {
   '1wall5targets_pasu reload': {

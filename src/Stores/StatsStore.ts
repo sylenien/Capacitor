@@ -1,42 +1,61 @@
-import { observable, action } from 'mobx'
+import { makeAutoObservable } from 'mobx'
 import { ScenarioStats, ScenarioStatHash } from 'const/types'
 
-class Stats {
-  @observable stats: ScenarioStats[] = []
-  @observable scenarioHighscoreStats: ScenarioStatHash = {}
-  @observable statsAmount = 0
-  @observable statsReady = false
+export class Stats {
+  stats: ScenarioStats[] = []
+  scenarioHighscoreStats: ScenarioStatHash = {}
+  statsAmount = 0
+  statsReady = false
 
-  @action
-  public setStatsAmount = (amount: number) => {
-    this.statsAmount = amount
+  constructor() {
+    makeAutoObservable(this)
   }
 
-  @action
-  public setStats = (stats: ScenarioStats[]) => {
-    this.stats = stats
+  public setStatsAmount = (amount: number) => {
+    return (this.statsAmount = amount)
+  }
 
+  public saveData = (stats: ScenarioStats[]) => {
+    this.setStats(stats)
+    this.mapStats(stats)
+    this.setReadyState(true)
+  }
+
+  public mapStats = (stats: ScenarioStats[]) => {
     let i = 0
+    const scenariosHash = this.scenarioHighscoreStats
+
     while (i < stats.length) {
       const scenario = stats[i]
       const lowercaseName = scenario.name.toLowerCase()
-      const existingData = this.scenarioHighscoreStats[lowercaseName]
+      const existingData = scenariosHash[lowercaseName]
       if (existingData) {
         const isNewScoreHigher = scenario.score > existingData.score
         if (isNewScoreHigher) {
-          this.scenarioHighscoreStats[lowercaseName] = scenario
+          scenariosHash[lowercaseName] = scenario
         }
       } else {
-        this.scenarioHighscoreStats[lowercaseName] = scenario
+        scenariosHash[lowercaseName] = scenario
       }
       i++
     }
 
-    this.statsReady = true
+    return this.saveHighscoreStats(scenariosHash)
+  }
 
-    console.log(this.stats, this.scenarioHighscoreStats)
+  public setStats = (stats: ScenarioStats[]) => {
+    return (this.stats = stats)
+  }
+
+  public setReadyState = (state: boolean) => {
+    return (this.statsReady = state)
+  }
+
+  private saveHighscoreStats = (mappedStats: ScenarioStatHash) => {
+    this.scenarioHighscoreStats = mappedStats
   }
 }
 
 const StatsStore = new Stats()
+
 export default StatsStore

@@ -12,13 +12,15 @@ export const createFilePromiseCollection = (files: FileList, loader: Function) =
           const resultData = reader.result as string
           const scenarioStats = {
             name: file.name.match(/(.*).-.Challenge/i)![1],
-            score: resultData.match(/Score:,(\d*)/i)![1],
+            score: parseInt(resultData.match(/Score:,(\d*)/i)![1], 10),
             date: file.name.match(/Challenge.-.(.*).Stats/i)![1],
           }
-          resolve(scenarioStats)
           loader(index + 1)
+          return resolve(scenarioStats)
+        } else {
+          loader(index + 1)
+          return resolve({ name: 'null', score: 0, date: 'null' })
         }
-        resolve({ name: 'null', score: 'null', date: 'null' })
       }
     })
 
